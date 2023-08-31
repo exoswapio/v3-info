@@ -1,6 +1,8 @@
 // used to mark unsupported tokens, these are hosted lists of unsupported tokens
 
 export const UNSUPPORTED_LIST_URLS: string[] = []
+export const EXOSWAP_LIST =
+  'https://raw.githubusercontent.com/exoswapio/dex-token-lists/v1.0.0/exoswap-experimental.token-list.json'
 export const OPTIMISM_LIST = 'https://static.optimism.io/optimism.tokenlist.json'
 export const ARBITRUM_LIST = 'https://bridge.arbitrum.io/token-list-42161.json'
 export const POLYGON_LIST =
@@ -10,6 +12,7 @@ export const BNB_LIST = 'https://raw.githubusercontent.com/plasmadlt/plasma-fina
 
 // lower index == higher priority for token import
 export const DEFAULT_LIST_OF_LISTS: string[] = [
+  EXOSWAP_LIST,
   OPTIMISM_LIST,
   ARBITRUM_LIST,
   POLYGON_LIST,
@@ -19,4 +22,11 @@ export const DEFAULT_LIST_OF_LISTS: string[] = [
 ]
 
 // default lists to be 'active' aka searched across
-export const DEFAULT_ACTIVE_LIST_URLS: string[] = [OPTIMISM_LIST, ARBITRUM_LIST, POLYGON_LIST, CELO_LIST, BNB_LIST]
+export const DEFAULT_ACTIVE_LIST_URLS: string[] = [
+  OPTIMISM_LIST,
+  ARBITRUM_LIST,
+  POLYGON_LIST,
+  CELO_LIST,
+  BNB_LIST,
+  EXOSWAP_LIST,
+]

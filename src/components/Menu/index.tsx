@@ -7,6 +7,7 @@ import { ApplicationModal } from '../../state/application/actions'
 import { useModalOpen, useToggleModal } from '../../state/application/hooks'
 
 import { ExternalLink } from '../../theme'
+import { DEX_APP_SUBDOMAIN, DEX_DOMAIN } from 'constants/projects'
 
 const StyledMenuIcon = styled(MenuIcon)`
   path {
@@ -80,7 +81,7 @@ const MenuItem = styled(ExternalLink)`
   }
 `
 
-const CODE_LINK = 'https://github.com/Uniswap/uniswap-v3-info'
+const CODE_LINK = 'https://github.com/exoswapio/v3-info'
 
 export default function Menu() {
   const node = useRef<HTMLDivElement>()
@@ -97,21 +98,17 @@ export default function Menu() {
 
       {open && (
         <MenuFlyout>
-          <MenuItem id="link" href="https://uniswap.org/">
+          <MenuItem id="link" href={`https://${DEX_APP_SUBDOMAIN}.${DEX_DOMAIN}/`}>
             <Info size={14} />
             About
           </MenuItem>
-          <MenuItem id="link" href="https://docs.uniswap.org/">
+          <MenuItem id="link" href={`https://docs.${DEX_DOMAIN}/`}>
             <BookOpen size={14} />
             Docs
           </MenuItem>
           <MenuItem id="link" href={CODE_LINK}>
             <Code size={14} />
             Github
-          </MenuItem>
-          <MenuItem id="link" href="https://discord.gg/FCfyBSbCU5">
-            <MessageCircle size={14} />
-            Discord
           </MenuItem>
         </MenuFlyout>
       )}

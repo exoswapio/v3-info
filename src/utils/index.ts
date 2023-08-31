@@ -5,18 +5,9 @@ import { Contract } from '@ethersproject/contracts'
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { Currency, CurrencyAmount, Fraction, Percent, Token } from '@uniswap/sdk-core'
 import { SupportedChainId } from 'constants/chains'
-import {
-  ArbitrumNetworkInfo,
-  AvalancheNetworkInfo,
-  BaseNetworkInfo,
-  BNBNetworkInfo,
-  CeloNetworkInfo,
-  NetworkInfo,
-  PolygonNetworkInfo,
-} from 'constants/networks'
+import { MesosNetworkInfo, NetworkInfo } from 'constants/networks'
 import JSBI from 'jsbi'
 import { TokenAddressMap } from '../state/lists/hooks'
-import { OptimismNetworkInfo } from '../constants/networks'
 
 // returns the checksummed address if the address is valid, otherwise returns false
 export function isAddress(value: any): string | false {
@@ -44,57 +35,9 @@ export function getEtherscanLink(
   networkVersion: NetworkInfo
 ): string {
   const prefix =
-    networkVersion === BNBNetworkInfo
-      ? 'https://bscscan.com/'
-      : networkVersion === PolygonNetworkInfo
-      ? 'https://polygonscan.com/'
-      : networkVersion === CeloNetworkInfo
-      ? 'https://celoscan.io/'
-      : networkVersion === AvalancheNetworkInfo
-      ? 'https://avascan.info/'
-      : networkVersion === ArbitrumNetworkInfo
-      ? 'https://arbiscan.io/'
-      : networkVersion === BaseNetworkInfo
-      ? 'https://basescan.org/'
-      : networkVersion === OptimismNetworkInfo
-      ? 'https://optimistic.etherscan.io'
+    networkVersion === MesosNetworkInfo
+      ? 'https://web3-explorer-mesos.thestratos.org'
       : `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}etherscan.io`
-
-  if (networkVersion === OptimismNetworkInfo) {
-    switch (type) {
-      case 'transaction': {
-        return `${prefix}/tx/${data}`
-      }
-      case 'token': {
-        return `${prefix}/address/${data}`
-      }
-      case 'block': {
-        return `https://optimistic.etherscan.io`
-      }
-      case 'address':
-      default: {
-        return `${prefix}/address/${data}`
-      }
-    }
-  }
-
-  if (networkVersion === ArbitrumNetworkInfo) {
-    switch (type) {
-      case 'transaction': {
-        return `${prefix}/tx/${data}`
-      }
-      case 'token': {
-        return `${prefix}/address/${data}`
-      }
-      case 'block': {
-        return 'https://arbiscan.io/'
-      }
-      case 'address':
-      default: {
-        return `${prefix}/address/${data}`
-      }
-    }
-  }
 
   switch (type) {
     case 'transaction': {

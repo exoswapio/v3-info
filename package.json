@@ -1,7 +1,7 @@
 {
-  "name": "@uniswap/interface",
-  "description": "Uniswap Interface",
-  "homepage": ".",
+  "name": "@exoswapio/v3-info",
+  "description": "Exoswap Interface",
+  "homepage": "https://exoswapio.github.io/v3-info",
   "private": true,
   "devDependencies": {
     "@emotion/core": "^11.0.0",

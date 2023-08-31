@@ -4,6 +4,7 @@ import weekOfYear from 'dayjs/plugin/weekOfYear'
 import gql from 'graphql-tag'
 import { PoolChartEntry } from 'state/pools/reducer'
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
+import { DEX_START_TIMSTAMP } from 'constants/projects'
 
 // format dayjs with the libraries that we need
 dayjs.extend(utc)
@@ -53,7 +54,7 @@ export async function fetchPoolChartData(address: string, client: ApolloClient<N
       feeTier: string
     }
   }[] = []
-  const startTimestamp = 1619170975
+  const startTimestamp = DEX_START_TIMSTAMP
   const endTimestamp = dayjs.utc().unix()
 
   let error = false

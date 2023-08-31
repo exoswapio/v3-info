@@ -5,12 +5,12 @@ import { hex } from 'wcag-contrast'
 import { Token } from '@uniswap/sdk-core'
 import uriToHttp from 'utils/uriToHttp'
 import { isAddress } from 'utils'
-import { SupportedChainId } from 'constants/chains'
+// import { SupportedChainId } from 'constants/chains'
 
 async function getColorFromToken(token: Token): Promise<string | null> {
-  if (token.chainId === SupportedChainId.RINKEBY && token.address === '0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735') {
-    return Promise.resolve('#FAAB14')
-  }
+  // if (token.chainId === SupportedChainId.RINKEBY && token.address === '0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735') {
+  //   return Promise.resolve('#FAAB14')
+  // }
 
   const path = `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${token.address}/logo.png`
 
@@ -46,7 +46,7 @@ async function getColorFromUriPath(uri: string): Promise<string | null> {
 }
 
 export function useColor(address?: string) {
-  const [color, setColor] = useState('#2172E5')
+  const [color, setColor] = useState('#00df9a')
 
   const formattedAddress = isAddress(address)
 
@@ -67,7 +67,7 @@ export function useColor(address?: string) {
 
     return () => {
       stale = true
-      setColor('#2172E5')
+      setColor('#00df9a')
     }
   }, [token])
 
@@ -75,7 +75,7 @@ export function useColor(address?: string) {
 }
 
 export function useListColor(listImageUri?: string) {
-  const [color, setColor] = useState('#2172E5')
+  const [color, setColor] = useState('#00df9a')
 
   useLayoutEffect(() => {
     let stale = false
@@ -90,7 +90,7 @@ export function useListColor(listImageUri?: string) {
 
     return () => {
       stale = true
-      setColor('#2172E5')
+      setColor('#00df9a')
     }
   }, [listImageUri])
 

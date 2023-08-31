@@ -1,4 +1,5 @@
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
+import { DEX_START_TIMSTAMP } from 'constants/projects'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
@@ -41,7 +42,7 @@ export async function fetchTokenChartData(address: string, client: ApolloClient<
     volumeUSD: string
     totalValueLockedUSD: string
   }[] = []
-  const startTimestamp = 1619170975
+  const startTimestamp = DEX_START_TIMSTAMP
   const endTimestamp = dayjs.utc().unix()
 
   let error = false

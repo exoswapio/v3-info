@@ -27,8 +27,8 @@ import DensityChart from 'components/DensityChart'
 import { MonoSpace } from 'components/shared'
 import { useActiveNetworkVersion } from 'state/application/hooks'
 import { networkPrefix } from 'utils/networkPrefix'
-import { EthereumNetworkInfo } from 'constants/networks'
 import { GenericImageWrapper } from 'components/Logo'
+import { DEX_APP_SUBDOMAIN, DEX_DOMAIN } from 'constants/projects'
 
 const ContentLayout = styled.div`
   display: grid;
@@ -52,11 +52,11 @@ const TokenButton = styled(GreyCard)`
 
 const ResponsiveRow = styled(RowBetween)`
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    flex-direction: column;
-    align-items: flex-start;
-    row-gap: 24px;
-    width: 100%:
-  `};
+		flex-direction: column;
+		align-items: flex-start;
+		row-gap: 24px;
+		width: 100%:
+	`};
 `
 
 const ToggleRow = styled(RowBetween)`
@@ -173,9 +173,7 @@ export default function PoolPage({
                   fontSize="24px"
                 >{` ${poolData.token0.symbol} / ${poolData.token1.symbol} `}</TYPE.label>
                 <GreyBadge>{feeTierPercent(poolData.feeTier)}</GreyBadge>
-                {activeNetwork === EthereumNetworkInfo ? null : (
-                  <GenericImageWrapper src={activeNetwork.imageURL} style={{ marginLeft: '8px' }} size={'26px'} />
-                )}
+                <GenericImageWrapper src={activeNetwork.imageURL} style={{ marginLeft: '8px' }} size={'26px'} />
               </RowFixed>
               <ResponsiveRow>
                 <StyledInternalLink to={networkPrefix(activeNetwork) + 'tokens/' + poolData.token0.address}>
@@ -183,9 +181,8 @@ export default function PoolPage({
                     <RowFixed>
                       <CurrencyLogo address={poolData.token0.address} size={'20px'} />
                       <TYPE.label fontSize="16px" ml="4px" style={{ whiteSpace: 'nowrap' }} width={'fit-content'}>
-                        {`1 ${poolData.token0.symbol} =  ${formatAmount(poolData.token1Price, 4)} ${
-                          poolData.token1.symbol
-                        }`}
+                        {`1 ${poolData.token0.symbol} =  ${formatAmount(poolData.token1Price, 4)}
+                        ${poolData.token1.symbol}`}
                       </TYPE.label>
                     </RowFixed>
                   </TokenButton>
@@ -195,36 +192,33 @@ export default function PoolPage({
                     <RowFixed>
                       <CurrencyLogo address={poolData.token1.address} size={'20px'} />
                       <TYPE.label fontSize="16px" ml="4px" style={{ whiteSpace: 'nowrap' }} width={'fit-content'}>
-                        {`1 ${poolData.token1.symbol} =  ${formatAmount(poolData.token0Price, 4)} ${
-                          poolData.token0.symbol
-                        }`}
+                        {`1 ${poolData.token1.symbol} =  ${formatAmount(poolData.token0Price, 4)}
+                        ${poolData.token0.symbol}`}
                       </TYPE.label>
                     </RowFixed>
                   </TokenButton>
                 </StyledInternalLink>
               </ResponsiveRow>
             </AutoColumn>
-            {activeNetwork !== EthereumNetworkInfo ? null : (
-              <RowFixed>
-                <StyledExternalLink
-                  href={`https://app.uniswap.org/#/add/${poolData.token0.address}/${poolData.token1.address}/${poolData.feeTier}`}
-                >
-                  <ButtonGray width="170px" mr="12px" style={{ height: '44px' }}>
-                    <RowBetween>
-                      <Download size={24} />
-                      <div style={{ display: 'flex', alignItems: 'center' }}>Add Liquidity</div>
-                    </RowBetween>
-                  </ButtonGray>
-                </StyledExternalLink>
-                <StyledExternalLink
-                  href={`https://app.uniswap.org/#/swap?inputCurrency=${poolData.token0.address}&outputCurrency=${poolData.token1.address}`}
-                >
-                  <ButtonPrimary width="100px" style={{ height: '44px' }}>
-                    Trade
-                  </ButtonPrimary>
-                </StyledExternalLink>
-              </RowFixed>
-            )}
+            <RowFixed>
+              <StyledExternalLink
+                href={`https://${DEX_APP_SUBDOMAIN}.${DEX_DOMAIN}/#/add/${poolData.token0.address}/${poolData.token1.address}/${poolData.feeTier}`}
+              >
+                <ButtonGray width="170px" mr="12px" style={{ height: '44px' }}>
+                  <RowBetween>
+                    <Download size={24} />
+                    <div style={{ display: 'flex', alignItems: 'center' }}>Add Liquidity</div>
+                  </RowBetween>
+                </ButtonGray>
+              </StyledExternalLink>
+              <StyledExternalLink
+                href={`https://${DEX_APP_SUBDOMAIN}.${DEX_DOMAIN}/#/swap/${poolData.token0.address}/${poolData.token1.address}`}
+              >
+                <ButtonPrimary width="100px" style={{ height: '44px' }}>
+                  Trade
+                </ButtonPrimary>
+              </StyledExternalLink>
+            </RowFixed>
           </ResponsiveRow>
           <ContentLayout>
             <DarkGreyCard>

@@ -5,7 +5,6 @@ import { TYPE, ExternalLink } from '../../theme'
 import { useActiveNetworkVersion, useSubgraphStatus } from '../../state/application/hooks'
 import { getEtherscanLink } from '../../utils'
 import useTheme from 'hooks/useTheme'
-import { EthereumNetworkInfo } from 'constants/networks'
 
 const StyledPolling = styled.div`
   display: flex;
@@ -68,7 +67,8 @@ export default function Polling() {
   const [activeNetwork] = useActiveNetworkVersion()
   const [status] = useSubgraphStatus()
   const [isMounted, setIsMounted] = useState(true)
-  const latestBlock = activeNetwork === EthereumNetworkInfo ? status.headBlock : status.syncedBlock
+  // const latestBlock = activeNetwork === EthereumNetworkInfo ? status.headBlock : status.syncedBlock
+  const latestBlock = status.syncedBlock
 
   useEffect(
     () => {

@@ -41,37 +41,37 @@ export function colors(darkMode: boolean): Colors {
 
     // text
     text1: darkMode ? '#FFFFFF' : '#000000',
-    text2: darkMode ? '#C3C5CB' : '#565A69',
-    text3: darkMode ? '#6C7284' : '#888D9B',
-    text4: darkMode ? '#565A69' : '#C3C5CB',
-    text5: darkMode ? '#2C2F36' : '#EDEEF2',
+    text2: darkMode ? '#c3cbc8' : '#565A69',
+    text3: darkMode ? '#6c8476' : '#888D9B',
+    text4: darkMode ? '#56695f' : '#C3C5CB',
+    text5: darkMode ? '#2c3632' : '#EDEEF2',
 
     // backgrounds / greys
-    bg0: darkMode ? '#191B1F' : '#F7F8FA',
-    bg1: darkMode ? '#1F2128' : '#FFFFFF',
-    bg2: darkMode ? '#2C2F36' : '#F7F8FA',
-    bg3: darkMode ? '#40444F' : '#EDEEF2',
-    bg4: darkMode ? '#565A69' : '#CED0D9',
-    bg5: darkMode ? '#6C7284' : '#888D9B',
+    bg0: darkMode ? '#191f1d' : '#F7F8FA',
+    bg1: darkMode ? '#1f2825' : '#FFFFFF',
+    bg2: darkMode ? '#2c3633' : '#F7F8FA',
+    bg3: darkMode ? '#404f4a' : '#EDEEF2',
+    bg4: darkMode ? '#566965' : '#CED0D9',
+    bg5: darkMode ? '#6c8480' : '#888D9B',
 
     //specialty colors
     modalBG: darkMode ? 'rgba(0,0,0,.425)' : 'rgba(0,0,0,0.3)',
     advancedBG: darkMode ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.6)',
 
     //primary colors
-    primary1: darkMode ? '#2172E5' : '#ff007a',
-    primary2: darkMode ? '#3680E7' : '#FF8CC3',
-    primary3: darkMode ? '#4D8FEA' : '#FF99C9',
-    primary4: darkMode ? '#376bad70' : '#F6DDE8',
-    primary5: darkMode ? '#153d6f70' : '#FDEAF1',
+    primary1: darkMode ? '#00df9a' : '#ff007a',
+    primary2: darkMode ? '#1fe0a4' : '#FF8CC3',
+    primary3: darkMode ? '#38deaa' : '#FF99C9',
+    primary4: darkMode ? '#37a38170' : '#F6DDE8',
+    primary5: darkMode ? '#15755770' : '#FDEAF1',
 
     // color text
-    primaryText1: darkMode ? '#6da8ff' : '#ff007a',
+    primaryText1: darkMode ? '#6affd1' : '#ff007a',
 
     // secondary colors
-    secondary1: darkMode ? '#2172E5' : '#ff007a',
-    secondary2: darkMode ? '#17000b26' : '#F6DDE8',
-    secondary3: darkMode ? '#17000b26' : '#FDEAF1',
+    secondary1: darkMode ? '#1feaab' : '#ff007a',
+    secondary2: darkMode ? '#d7f2ea26' : '#F6DDE8',
+    secondary3: darkMode ? '#d7f2ea26' : '#FDEAF1',
 
     // other
     pink1: '#ff007a',

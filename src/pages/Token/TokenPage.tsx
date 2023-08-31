@@ -38,11 +38,11 @@ import { MonoSpace } from 'components/shared'
 import dayjs from 'dayjs'
 import { useActiveNetworkVersion } from 'state/application/hooks'
 import { networkPrefix } from 'utils/networkPrefix'
-import { EthereumNetworkInfo } from 'constants/networks'
 import { GenericImageWrapper } from 'components/Logo'
 // import { SmallOptionButton } from '../../components/Button'
 import { useCMCLink } from 'hooks/useCMCLink'
 import CMCLogo from '../../assets/images/cmc.png'
+import { DEX_APP_SUBDOMAIN, DEX_DOMAIN } from 'constants/projects'
 
 const PriceText = styled(TYPE.label)`
   font-size: 36px;
@@ -85,6 +85,25 @@ enum ChartView {
 
 const DEFAULT_TIME_WINDOW = TimeWindow.WEEK
 
+// NOTE: Address overrider for CMC
+const getPriceAddress = (address: string): string => {
+  if (
+    [
+      '0xe5190a93318a31cf0a6fea0032b0a3ffe5731f0e', // USDT Mesos
+    ].includes(address.toLowerCase())
+  ) {
+    return '0xdac17f958d2ee523a2206206994597c13d831ec7'
+  }
+  if (
+    [
+      '0x42f3f703c0a15a4ad920cfdb4b87265458cb4325', // WSTOS
+    ].includes(address.toLowerCase())
+  ) {
+    return '0x08c32b0726C5684024ea6e141C50aDe9690bBdcc'
+  }
+  return address
+}
+
 export default function TokenPage({
   match: {
     params: { address },
@@ -109,7 +128,7 @@ export default function TokenPage({
   const chartData = useTokenChartData(address)
 
   // check for link to CMC
-  const cmcLink = useCMCLink(address)
+  const cmcLink = useCMCLink(getPriceAddress(address))
 
   // format for chart component
   const formattedTvlData = useMemo(() => {
@@ -172,7 +191,10 @@ export default function TokenPage({
         !tokenData.exists ? (
           <LightGreyCard style={{ textAlign: 'center' }}>
             No pool has been created with this token yet. Create one
-            <StyledExternalLink style={{ marginLeft: '4px' }} href={`https://app.uniswap.org/#/add/${address}`}>
+            <StyledExternalLink
+              style={{ marginLeft: '4px' }}
+              href={`https://${DEX_APP_SUBDOMAIN}.${DEX_DOMAIN}/#/add/${address}`}
+            >
               here.
             </StyledExternalLink>
           </LightGreyCard>
@@ -224,32 +246,28 @@ export default function TokenPage({
                     <TYPE.main ml={'6px'} fontSize="20px">
                       ({tokenData.symbol})
                     </TYPE.main>
-                    {activeNetwork === EthereumNetworkInfo ? null : (
-                      <GenericImageWrapper src={activeNetwork.imageURL} style={{ marginLeft: '8px' }} size={'26px'} />
-                    )}
+                    <GenericImageWrapper src={activeNetwork.imageURL} style={{ marginLeft: '8px' }} size={'26px'} />
                   </RowFixed>
                   <RowFlat style={{ marginTop: '8px' }}>
                     <PriceText mr="10px"> {formatDollarAmount(tokenData.priceUSD)}</PriceText>
                     (<Percent value={tokenData.priceUSDChange} />)
                   </RowFlat>
                 </AutoColumn>
-                {activeNetwork !== EthereumNetworkInfo ? null : (
-                  <RowFixed>
-                    <StyledExternalLink href={`https://app.uniswap.org/#/add/${address}`}>
-                      <ButtonGray width="170px" mr="12px" height={'100%'} style={{ height: '44px' }}>
-                        <RowBetween>
-                          <Download size={24} />
-                          <div style={{ display: 'flex', alignItems: 'center' }}>Add Liquidity</div>
-                        </RowBetween>
-                      </ButtonGray>
-                    </StyledExternalLink>
-                    <StyledExternalLink href={`https://app.uniswap.org/#/swap?inputCurrency=${address}`}>
-                      <ButtonPrimary width="100px" bgColor={backgroundColor} style={{ height: '44px' }}>
-                        Trade
-                      </ButtonPrimary>
-                    </StyledExternalLink>
-                  </RowFixed>
-                )}
+                <RowFixed>
+                  <StyledExternalLink href={`https://${DEX_APP_SUBDOMAIN}.${DEX_DOMAIN}/#/add/${address}`}>
+                    <ButtonGray width="170px" mr="12px" height={'100%'} style={{ height: '44px' }}>
+                      <RowBetween>
+                        <Download size={24} />
+                        <div style={{ display: 'flex', alignItems: 'center' }}>Add Liquidity</div>
+                      </RowBetween>
+                    </ButtonGray>
+                  </StyledExternalLink>
+                  <StyledExternalLink href={`https://${DEX_APP_SUBDOMAIN}.${DEX_DOMAIN}/#/swap/${address}`}>
+                    <ButtonPrimary width="100px" bgColor={backgroundColor} style={{ height: '44px' }}>
+                      Trade
+                    </ButtonPrimary>
+                  </StyledExternalLink>
+                </RowFixed>
               </ResponsiveRow>
             </AutoColumn>
             <ContentLayout>
